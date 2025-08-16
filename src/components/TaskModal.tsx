@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
-import { addTask } from "../features/taskSlice";
+import { addTask, updateTask } from "../features/taskSlice";
 import type { Task, TaskModalProps } from "../Types/types";
+import { toast } from "react-toastify";
 
 const TaskModal = ({
   isOpen,
@@ -13,6 +14,7 @@ const TaskModal = ({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("todo");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,23 +27,46 @@ const TaskModal = ({
       setDescription("");
       setStatus("todo");
     }
-  }, [initialData]);
+    setError("");
+  }, [initialData, isOpen]);
 
-  const handleSubmit = () => {
-    const newTask: Task = {
-      id: uuidv4(),
-      title,
-      description,
-      status,
-    };
+ const handleSubmit = () => {
+  if (!title.trim()) {
+    setError("Task title is required!");
+    return;
+  }
+  if (!description.trim()) {
+    setError("Task description is required!");
+    return;
+  }
+
+  const newTask: Task = {
+    id: initialData ? initialData.id : uuidv4(),
+    title,
+    description,
+    status,
+  };
+
+  if (initialData) {
+    dispatch(updateTask(newTask));
+    toast.success("Task updated successfully ");
+  } else {
     dispatch(addTask(newTask));
-
     onSave(newTask);
-    onClose();
+    toast.success("Task added successfully ");
+  }
+
+  if (!initialData) {
     setTitle("");
     setDescription("");
-    setStatus("todo;");
-  };
+    setStatus("todo");
+    setError("");
+  }
+
+  setTimeout(() => {
+    onClose();
+  }, 800);
+};
 
   if (!isOpen) return null;
 
@@ -51,18 +76,27 @@ const TaskModal = ({
         <h2 className="text-xl font-bold mb-4">
           {initialData ? "Edit Task" : "Add Task"}
         </h2>
+
+        {error && (
+          <p className="mb-2 text-sm text-red-600 bg-red-100 p-2 rounded">
+            {error}
+          </p>
+        )}
+
         <input
           type="text"
           placeholder="Title"
           className="w-full mb-2 p-2 border rounded"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <textarea
           placeholder="Description"
           className="w-full mb-2 p-2 border rounded"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
         />
         <select
           className="w-full mb-4 p-2 border rounded"
@@ -73,6 +107,7 @@ const TaskModal = ({
           <option value="pending">Pending</option>
           <option value="completed">Completed</option>
         </select>
+
         <div className="flex justify-end gap-2">
           <button onClick={onClose} className="px-3 py-1 bg-gray-300 rounded">
             Cancel

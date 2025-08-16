@@ -18,7 +18,7 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action: { payload: Task }) => {
-        state.tasks.unshift(action.payload);
+        state.tasks.push(action.payload);
       addTaskToStorage(action.payload);
     },
     deleteTask: (state, action: { payload: string }) => {
