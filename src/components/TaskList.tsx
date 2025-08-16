@@ -69,7 +69,7 @@ const handleSave = (task: Task) => {
       <TaskSummary />
       <div className="flex flex-row justify-between m-5">
         <select
-          className="p-2 border rounded text-gray-700"
+          className="p-2 border rounded text-gray-700 dark:bg-gray-900 dark:text-gray-100 "
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
@@ -106,16 +106,16 @@ const handleSave = (task: Task) => {
             .map((task: Task) => (
               <li
                 key={task.id}
-                className="bg-white p-5 rounded-lg shadow-md border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center hover:bg-gray-300"
+                className="bg-white p-5 rounded-lg shadow-md border dark:bg-gray-900 text-gray-900 dark:text-white border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center hover:bg-gray-300"
               >
                 <div className="flex-1 space-y-1">
-                  <p className="text-lg font-semibold text-gray-800">
+                  <p className="text-lg font-semibold text-gray-800 dark:text-gray-400">
                     {task.title}
                   </p>
                   {task.description && (
-                    <p className="text-gray-600">{task.description}</p>
+                    <p className="text-gray-600 dark:bg-gray-900 dark:text-gray-400">{task.description}</p>
                   )}
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-gray-500">
                     Status:{" "}
                     <span
                       className={`font-medium ${
