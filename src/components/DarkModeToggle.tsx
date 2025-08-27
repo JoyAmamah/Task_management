@@ -21,7 +21,7 @@ const DarkModeToggle = () => {
       className="p-2 rounded-lg border border-gray-300 dark:border-gray-600 
                  bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
     >
-      {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+      {darkMode ? "☀️ " : "🌙"}
     </button>
   );
 };

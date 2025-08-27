@@ -23,3 +23,11 @@ export const initialState: TaskState = {
   loading: false,
   error: null,
 };
+
+export interface SEOProps {
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+}
+

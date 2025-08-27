@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block common sensitive folders (adjust if you have them)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Point crawlers to your sitemap
+Sitemap: https://tasks-trackerapp.netlify.app/sitemap.xml

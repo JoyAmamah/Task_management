@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../features/store";
+import React from "react";
 
 const TaskSummary = () => {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -27,4 +28,4 @@ const TaskSummary = () => {
   );
 };
 
-export default TaskSummary;
+export default React.memo(TaskSummary);

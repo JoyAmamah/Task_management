@@ -71,8 +71,8 @@ const TaskModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-900 p-6 rounded-lg w-[90%] max-w-md shadow-lg">
+    <section className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+      <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-900 p-6 rounded-lg w-[90%] max-w-md shadow-lg">
         <h2 className="text-xl font-bold mb-4 dark:text-gray-100">
           {initialData ? "Edit Task" : "Add Task"}
         </h2>
@@ -120,7 +120,7 @@ const TaskModal = ({
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,13 +1,21 @@
 import { Routes, Route } from "react-router-dom";
-import TaskList from "./components/TaskList";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DarkModeToggle from "./components/DarkModeToggle";
+import { lazy, Suspense } from "react";
+import { HelmetProvider } from "react-helmet-async";
+import SEO from "./seo/SEO";
+
+const TaskList = lazy(() => import("./components/TaskList"));
 
 const App = () => {
   return (
     <>
-     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <HelmetProvider>
+
+    <Suspense fallback={<p>Loading...</p>}>
+     <div className="min-h-screen bg-white  ">
+      <SEO/>
       <header className="flex justify-between items-center p-4 shadow">
         <h1 className="text-xl font-bold">Task Manager</h1>
         <DarkModeToggle />
@@ -26,6 +34,8 @@ const App = () => {
         draggable
       />
       </div>
+      </Suspense>
+      </HelmetProvider>
     </>
   );
 };
