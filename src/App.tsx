@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DarkModeToggle from "./components/DarkModeToggle";
 import { lazy, Suspense } from "react";
-import { HelmetProvider } from "react-helmet-async";
+// import { HelmetProvider } from "react-helmet-async";
 import SEO from "./seo/SEO";
 
 const TaskList = lazy(() => import("./components/TaskList"));
@@ -11,7 +11,7 @@ const TaskList = lazy(() => import("./components/TaskList"));
 const App = () => {
   return (
     <>
-      <HelmetProvider>
+      {/* <HelmetProvider> */}
 
     <Suspense fallback={<p>Loading...</p>}>
      <div className="min-h-screen bg-white  ">
@@ -35,7 +35,7 @@ const App = () => {
       />
       </div>
       </Suspense>
-      </HelmetProvider>
+      {/* </HelmetProvider> */}
     </>
   );
 };
